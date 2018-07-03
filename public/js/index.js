@@ -8,11 +8,11 @@ socket.on('connect',()=>{
 	// 	createdAt: 135
 	// });
 
-	socket.emit('createMessage',{
-		to: "Jeel",
-		text: "Hello , How r u??",
-		createdAt: 135
-	});
+	// socket.emit('createMessage',{
+	// 	to: "Jeel",
+	// 	text: "Hello , How r u??",
+	// 	createdAt: 135
+	// });
 });
 socket.on('disconnect',()=>{
 	console.log("Disconnected to server");
@@ -23,3 +23,10 @@ socket.on('disconnect',()=>{
 socket.on('newMessage',(message)=>{
 	console.log("New message",message);
 });
+socket.emit('createMessage',{
+		to: "Jeel",
+		text: "Hello , How r u??",
+		createdAt: 135
+	},()=>{
+		console.log('Got It');
+	});

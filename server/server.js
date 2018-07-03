@@ -22,13 +22,31 @@ io.on('connection',(socket)=>{
 	// 	console.log("Created Email",newEmail);		
 	// });
 	socket.emit('newMessage',{
-		from: "rina",
+		from: "Admin",
+		text: "Welcome to chat app",
+		createdAt: 145
+	});
+	socket.broadcast.emit('newMessage',{
+		from: "krina",
 		text: "Hello , How r u??",
 		createdAt: 145
 	});
+	socket.on('createMessage',(messsage,callback)=>{
+	console.log("Created Mesage",messsage);	
 
-	socket.on('createMessage',(messsage)=>{
-	console.log("Created Mesage",messsage);		
+	//****send message to all user itself also*******
+		io.emit('newMessage',{
+		from: "rina",
+		text: "Hello , How r u??",
+		createdAt: new Date().getTime()
+	});	
+	callback();
+	//**********Broadcast******************
+	// socket.broadcast.emit('newMessage',{
+	// 	from: "krina",
+	// 	text: "Hello , How r u??",
+	// 	createdAt: 145
+	// });	
 	});
 	socket.on('disconnect',()=>{
 	console.log("User was disconnected");		
